@@ -1,3 +1,3 @@
 # React + TypeScript + Vite
 
-стиля на препроцесорі SASS
+стилі на препроцесорі SASS
