@@ -1,15 +1,29 @@
 import "./InputField.sass";
+import { useRef } from "react";
 
 interface InputFieldProps {
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>;
-  handleAdd: (e:React.FormEvent) => void
+  handleAdd: (e: React.FormEvent) => void;
 }
 
-export default function InputField({ todo, setTodo, handleAdd }: InputFieldProps) {
+export default function InputField({
+  todo,
+  setTodo,
+  handleAdd,
+}: InputFieldProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   return (
-    <form className="input" onSubmit={handleAdd}>
+    <form
+      className="input"
+      onSubmit={(e) => {
+        handleAdd(e);
+        inputRef.current?.blur();
+      }}
+    >
       <input
+        ref={inputRef}
         type="input"
         value={todo}
         onChange={(e) => {
