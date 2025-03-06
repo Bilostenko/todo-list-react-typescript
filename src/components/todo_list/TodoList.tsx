@@ -1,16 +1,19 @@
-import "./todoList.sass";
-import { Todo } from "../../model";
-interface TodoListProps {
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-}
+import "./todoList.sass"
+import { useAppSelector, useAppDispatch } from "../../app/hooks"
+import { selectTodos, removeTodo } from "../../features/submit_form/submitSlice"
 
-export default function TodoList({ todos /*setTodos*/ }: TodoListProps) {
+export default function TodoList() {
+  const todos = useAppSelector(selectTodos)
+  const dispatch = useAppDispatch()
+
   return (
     <div className="todos">
-      {todos.map((todo) => {
-        return <li key={todo.id}>{todo.todo}</li>;
-      })}
+      {todos.map((todo) => (
+        <li key={todo.id}>
+          {todo.todo}
+          <button onClick={() => dispatch(removeTodo(todo.id))}>Delete</button>
+        </li>
+      ))}
     </div>
-  );
+  )
 }
