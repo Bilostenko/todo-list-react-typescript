@@ -1,12 +1,9 @@
-import { Todo } from "../../model"
+import { SingleTodoProps } from "../../types/singleTodoProps"
 
-type SingleTodoProps = {
-    todos: Todo[],
-    todo: Todo,
-    setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
-}
+export default function SingleTodo({ todo, todos, setTodos }: SingleTodoProps) {
+  console.log(todos); 
+  console.log(setTodos); 
 
-export default function SingleTodo({ todo}:SingleTodoProps){
   return (
     <div>
       <form className="todos__single">
