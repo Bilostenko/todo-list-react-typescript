@@ -1,0 +1,27 @@
+.todos__single
+    display: flex
+    flex-wrap: wrap
+    max-width: 100%
+    border-radius: 5px
+    padding: 20px
+    margin-top: 15px
+    background-image: url('https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg')
+
+    @media(max-width: 700px)
+        width: 100%
+
+    .todos__icon
+        margin-left: 10px
+        font-size: 25px
+        cursor: pointer
+
+    .todos__single_text
+        flex: 1
+        min-width: 0
+        padding: 5px
+        border: none
+        font-size: 20px
+        word-break: break-word
+
+    &:focus
+        outline: none

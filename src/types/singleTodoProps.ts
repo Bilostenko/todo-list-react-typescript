@@ -1,4 +1,3 @@
-// types.ts
 import { Todo } from "../model";
 
 export type SingleTodoProps = {

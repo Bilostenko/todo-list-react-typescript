@@ -1,19 +1,15 @@
 import "./todoList.sass"
-import { useAppSelector, useAppDispatch } from "../../app/hooks"
-import { selectTodos, removeTodo } from "../../features/submit_form/submitSlice"
+import { useAppSelector } from "../../app/hooks"
+import { selectTodos } from "../../features/submit_form/submitSlice"
 import SingleTodo from "../single_todo/SingleTodo"
 
 export default function TodoList() {
   const todos = useAppSelector(selectTodos) // Використовуємо Redux для стану завдань
-  const dispatch = useAppDispatch()
 
   return (
     <div className="todos">
-      {todos.map((todo) => (
-        <li key={todo.id}>
+      {todos?.map((todo) => (
           <SingleTodo todo={todo} todos={todos} setTodos={() => {}} />
-          <button onClick={() => dispatch(removeTodo(todo.id))}>Delete</button>
-        </li>
       ))}
     </div>
   )

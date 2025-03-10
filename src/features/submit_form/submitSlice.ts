@@ -17,19 +17,20 @@ export const todoSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    // Додавання нового завдання
     addTodo: (state, action: PayloadAction<Todo>) => {
       state.todos.push(action.payload)
     },
-    // Видалення завдання
     removeTodo: (state, action: PayloadAction<number>) => {
       state.todos = state.todos.filter(todo => todo.id !== action.payload)
     },
+    doneTodo: (state, action: PayloadAction<number>) => {
+      state.todos = state.todos.map(todo => todo.id === action.payload ? { ...todo, isDone: !todo.isDone } : todo)
+    }
   },
 })
 
 // Експорт дій
-export const { addTodo, removeTodo } = todoSlice.actions
+export const { addTodo, removeTodo, doneTodo } = todoSlice.actions
 
 // Селектор для отримання списку завдань
 export const selectTodos = (state: RootState) => state.todos.todos
