@@ -4,7 +4,7 @@ import { selectTodos } from "../../features/submit_form/submitSlice"
 import SingleTodo from "../single_todo/SingleTodo"
 
 export default function TodoList() {
-  const todos = useAppSelector(selectTodos) // Використовуємо Redux для стану завдань
+  const todos = useAppSelector(selectTodos)
 
   return (
     <div className="todos">
@@ -14,3 +14,4 @@ export default function TodoList() {
     </div>
   )
 }
+
