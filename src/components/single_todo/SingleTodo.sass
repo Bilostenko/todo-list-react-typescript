@@ -1,11 +1,15 @@
 .todos__single
     display: flex
     flex-wrap: wrap
-    max-width: 100%
+    max-width: 95%
     border-radius: 5px
     padding: 20px
     margin-top: 15px
     background-image: url('https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg')
+    
+    &:focus
+        box-shadow: none
+        outline: none
 
     @media(max-width: 700px)
         width: 100%

@@ -24,13 +24,16 @@ export const todoSlice = createSlice({
       state.todos = state.todos.filter(todo => todo.id !== action.payload)
     },
     doneTodo: (state, action: PayloadAction<number>) => {
-      state.todos = state.todos.map(todo => todo.id === action.payload ? { ...todo, isDone: !todo.isDone } : todo)
-    }
+      state.todos = state.todos.map(todo => todo.id === action.payload ? { ...todo, isDone: !todo.isDone} : todo)
+    },
+    editTodo: (state, action: PayloadAction<{id:number, todo:string}>)=>{
+      state.todos = state.todos.map(todo => todo.id === action.payload.id ? { ...todo, todo: action.payload.todo} : todo)
+    },
   },
 })
 
 // Експорт дій
-export const { addTodo, removeTodo, doneTodo } = todoSlice.actions
+export const { addTodo, removeTodo, doneTodo, editTodo } = todoSlice.actions
 
 // Селектор для отримання списку завдань
 export const selectTodos = (state: RootState) => state.todos.todos
