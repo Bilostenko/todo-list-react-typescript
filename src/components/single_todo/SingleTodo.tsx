@@ -1,12 +1,18 @@
 import './singleTodo.sass'
-import { SingleTodoProps } from "../../types/singleTodoProps";
 import { MdEdit, MdDelete, MdDoneOutline } from "react-icons/md";
 import { useAppDispatch } from '../../app/hooks';
 import { doneTodo, removeTodo, editTodo } from "../../features/submit_form/submitSlice"
 import { useState, useRef, useEffect } from 'react';
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from '@dnd-kit/utilities';
+import { Todo } from '../../model';
 
-export default function SingleTodo({ todo }: SingleTodoProps) {
+interface SingleTodoProps {
+  todo: Todo;
+  todos: Todo[];
+}
 
+export default function SingleTodo({ todo, todos }: SingleTodoProps) {
   const [edit, setEdit] = useState<boolean>(false)
   const [editedText, setEditedText] = useState<string>(todo.todo)
 
@@ -23,9 +29,19 @@ export default function SingleTodo({ todo }: SingleTodoProps) {
     inputRef.current?.focus()
   }, [edit])
 
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({id: todo.id})
+  const style = {
+    transition,
+    transform: CSS.Transform.toString(transform)
+  }
+
   return (
     <div>
-      <form className="todos__single" onSubmit={handleEdit}>
+      <form className="todos__single" 
+        {...attributes} {...listeners} 
+        onSubmit={handleEdit} 
+        ref={setNodeRef} 
+        style={style}>
         {edit ? (
           <input
             ref={inputRef}

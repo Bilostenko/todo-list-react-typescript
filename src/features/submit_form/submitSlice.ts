@@ -29,14 +29,18 @@ export const todoSlice = createSlice({
     editTodo: (state, action: PayloadAction<{id:number, todo:string}>)=>{
       state.todos = state.todos.map(todo => todo.id === action.payload.id ? { ...todo, todo: action.payload.todo} : todo)
     },
+    reorderTodos: (state, action: PayloadAction<Todo[]>) => {
+      state.todos = action.payload;
+    },
   },
 })
 
 // Експорт дій
-export const { addTodo, removeTodo, doneTodo, editTodo } = todoSlice.actions
+export const { addTodo, removeTodo, doneTodo, editTodo, reorderTodos } = todoSlice.actions
 
 // Селектор для отримання списку завдань
 export const selectTodos = (state: RootState) => state.todos.todos
+
 
 // Експорт reducer'а для додавання до store
 export default todoSlice.reducer

@@ -2,6 +2,7 @@ import "./todoList.sass"
 import { useAppSelector } from "../../app/hooks"
 import { selectTodos } from "../../features/submit_form/submitSlice"
 import SingleTodo from "../single_todo/SingleTodo"
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 
 export default function TodoList() {
   const todos = useAppSelector(selectTodos)
@@ -10,18 +11,25 @@ export default function TodoList() {
     <div className="container">
       <div className="todos">
         <span className="todos_heading">Active task</span>
-        {todos?.map((todo) => (
-          <SingleTodo key={todo.id} todo={todo} todos={todos} setTodos={() => { }} />
-        ))}
+        <SortableContext 
+          items={todos.map(todo => todo.id)} 
+          strategy={verticalListSortingStrategy}
+        >
+          {todos?.map((todo) => (
+            <SingleTodo 
+              key={todo.id} 
+              todo={todo} 
+              todos={todos} 
+            />
+          ))}
+        </SortableContext>
       </div>
-      <div className="todos remove">
+    </div>
+  )
+}
+ {/* <div className="todos remove">
         <span className="todos_heading">Active task</span>
         {todos?.map((todo) => (
           <SingleTodo key={todo.id} todo={todo} todos={todos} setTodos={() => { }} />
         ))}
-      </div>
-    </div>
-
-  )
-}
-
+      </div> */}

@@ -22,7 +22,6 @@ export default function InputField({ todo, setTodo }: InputFieldProps) {
       inputRef.current?.blur()
     }
   }
-
   return (
     <form className="input" onSubmit={handleAdd}>
       <input
