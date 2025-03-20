@@ -12,7 +12,7 @@ interface SingleTodoProps {
   todos: Todo[];
 }
 
-export default function SingleTodo({ todo, todos }: SingleTodoProps) {
+export default function SingleTodo({ todo }: SingleTodoProps) {
   const [edit, setEdit] = useState<boolean>(false)
   const [editedText, setEditedText] = useState<string>(todo.todo)
 
@@ -29,44 +29,80 @@ export default function SingleTodo({ todo, todos }: SingleTodoProps) {
     inputRef.current?.focus()
   }, [edit])
 
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({id: todo.id})
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: todo.id,
+    disabled: edit // Відключаємо сортування під час редагування
+  })
+  
   const style = {
     transition,
     transform: CSS.Transform.toString(transform)
   }
 
-  return (
-    <div>
-      <form className="todos__single" 
-        {...attributes} {...listeners} 
-        onSubmit={handleEdit} 
-        ref={setNodeRef} 
-        style={style}>
-        {edit ? (
-          <input
-            ref={inputRef}
-            type="text"
-            value={editedText}
-            onChange={(e) => setEditedText(e.target.value)}
-            className="todos__single" />
-        ) : (
-          todo.isDone ? (
-            <s className="todos__single_text">{todo.todo}</s>
-          ) : (
-            <span className="todos__single_text">{todo.todo}</span>
-          )
-        )}
+  const handleEditClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setEdit(true);
+  };
 
-        <div>
-          <span className="todos__icon todos__icon_edit" onClick={() => setEdit(true)}>
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dispatch(removeTodo(todo.id));
+  };
+
+  const handleDoneClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dispatch(doneTodo(todo.id));
+  };
+
+  return (
+    <div ref={setNodeRef} style={style} className="todos__item">
+      <form className="todos__single" onSubmit={handleEdit}>
+        <div className="todos__content">
+          {edit ? (
+            <input
+              ref={inputRef}
+              type="text"
+              value={editedText}
+              onChange={(e) => setEditedText(e.target.value)}
+              className="todos__single-input" 
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            todo.isDone ? (
+              <s className="todos__single_text">{todo.todo}</s>
+            ) : (
+              <span className="todos__single_text">{todo.todo}</span>
+            )
+          )}
+        </div>
+
+        <div className="todos__actions">
+          <button 
+            type="button"
+            className="todos__icon todos__icon_edit" 
+            onClick={handleEditClick}>
             <MdEdit />
-          </span>
-          <span className="todos__icon todos__icon_delete" onClick={() => dispatch(removeTodo(todo.id))}>
+          </button>
+          <button 
+            type="button"
+            className="todos__icon todos__icon_delete" 
+            onClick={handleDeleteClick}>
             <MdDelete />
-          </span>
-          <span className="todos__icon" onClick={() => dispatch(doneTodo(todo.id))}>
+          </button>
+          <button 
+            type="button"
+            className="todos__icon" 
+            onClick={handleDoneClick}>
             <MdDoneOutline />
-          </span>
+          </button>
+        </div>
+        
+        {/* Кнопка для перетягування перенесена в кінець (справа) */}
+        <div className="todos__drag-handle" {...attributes} {...listeners}>
+          <span className="drag-icon">⁝⁝</span>
         </div>
       </form>
     </div>
