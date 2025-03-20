@@ -29,11 +29,18 @@ export default function SingleTodo({ todo }: SingleTodoProps) {
     inputRef.current?.focus()
   }, [edit])
 
+  // const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+  //   id: todo.id,
+  //   disabled: edit // Відключаємо сортування під час редагування
+  // })
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: todo.id,
-    disabled: edit // Відключаємо сортування під час редагування
+    data: {
+      type: "todo",
+      todo
+    }
   })
-  
+
   const style = {
     transition,
     transform: CSS.Transform.toString(transform)
@@ -67,7 +74,7 @@ export default function SingleTodo({ todo }: SingleTodoProps) {
               type="text"
               value={editedText}
               onChange={(e) => setEditedText(e.target.value)}
-              className="todos__single-input" 
+              className="todos__single-input"
               onClick={(e) => e.stopPropagation()}
             />
           ) : (
@@ -80,27 +87,26 @@ export default function SingleTodo({ todo }: SingleTodoProps) {
         </div>
 
         <div className="todos__actions">
-          <button 
+          <button
             type="button"
-            className="todos__icon todos__icon_edit" 
+            className="todos__icon todos__icon_edit"
             onClick={handleEditClick}>
             <MdEdit />
           </button>
-          <button 
+          <button
             type="button"
-            className="todos__icon todos__icon_delete" 
+            className="todos__icon todos__icon_delete"
             onClick={handleDeleteClick}>
             <MdDelete />
           </button>
-          <button 
+          <button
             type="button"
-            className="todos__icon" 
+            className="todos__icon"
             onClick={handleDoneClick}>
             <MdDoneOutline />
           </button>
         </div>
-        
-        {/* Кнопка для перетягування перенесена в кінець (справа) */}
+
         <div className="todos__drag-handle" {...attributes} {...listeners}>
           <span className="drag-icon">⁝⁝</span>
         </div>
