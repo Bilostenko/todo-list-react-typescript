@@ -1,7 +1,0 @@
-import { configureStore } from '@reduxjs/toolkit';
-import todoReducer from '../features/submit_form/submitSlice';
-export const store = configureStore({
-    reducer: {
-        todos: todoReducer,
-    },
-});
