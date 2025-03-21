@@ -1,7 +1,3 @@
-Ось гарно структурований опис для твого проекту на GitHub, який включає всі твої нотатки:
-
----
-
 # Todo List Project with React, TypeScript, and Vite
 
 This is a simple **To-Do List** application built with **React**, **TypeScript**, and **Vite**. The project utilizes modern frontend technologies and libraries to provide an interactive and responsive experience for managing tasks.
