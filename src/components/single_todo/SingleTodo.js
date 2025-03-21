@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import "./singleTodo.sass";
+import "./SingleTodo.sass";
 import { MdEdit, MdDelete, MdDoneOutline } from "react-icons/md";
 import { useAppDispatch } from "../../app/hooks";
 import { doneTodo, removeTodo, editTodo, } from "../../features/submit_form/submitSlice";
