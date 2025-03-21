@@ -58,7 +58,6 @@ export default function TodoList() {
           isDone: !draggedTodo.isDone 
         };
         
-        // Знаходимо індекс елемента, над яким перетягнули
         const overIndex = newTodos.findIndex(t => t.id === overId);
         
         // Вставляємо елемент на нову позицію
