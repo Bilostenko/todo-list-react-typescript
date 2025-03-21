@@ -1,4 +1,4 @@
-import "./singleTodo.sass";
+import "./SingleTodo.sass";
 import { MdEdit, MdDelete, MdDoneOutline } from "react-icons/md";
 import { useAppDispatch } from "../../app/hooks";
 import {
