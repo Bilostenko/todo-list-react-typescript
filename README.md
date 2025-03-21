@@ -1,16 +1,30 @@
-# React + TypeScript + Vite
+# Todo List Project with React, Redux, TypeScript, and Vitee
 
-1. стилі на препроцесорі SASS
-2. за допомогою редаксу можемо керувати станом та Видаляти, Змінювати і Відмічати як зроблено завдання.
-3. drag and drop верх та вниз в межах однієї колонки
+This is a simple To-Do List application built with React, TypeScript, and Vite. The project utilizes modern frontend technologies and libraries to provide an interactive and responsive experience for managing tasks.
 
-    "@dnd-kit/accessibility": "^3.1.1",
-    "@dnd-kit/core": "^6.3.1",
-    "@dnd-kit/sortable": "^10.0.0",
-    "@dnd-kit/utilities": "^3.2.2",
-    "@reduxjs/toolkit": "^2.6.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-icons": "^5.5.0",
-    "react-redux": "^9.2.0",
-    "sass": "^1.85.1"
+Features
+State Management with Redux:
+Manage the state of tasks with Redux. You can easily add, edit, delete, and mark tasks as completed.
+
+Drag-and-Drop:
+Implemented drag and drop functionality within a single column to reorder tasks using the @dnd-kit library. You can move tasks up and down seamlessly.
+
+SASS Styling:
+The project uses SASS for styling, allowing for more manageable and reusable styles with variables, mixins, and nested rules.
+
+Technologies Used
+React: ^19.0.0
+TypeScript: Strongly typed JavaScript for better code quality and maintainability.
+Vite: A fast build tool that serves the project during development and bundles it for production.
+Redux: @reduxjs/toolkit: ^2.6.0 for state management.
+React-Redux: ^9.2.0 to connect Redux with React components.
+SASS: ^1.85.1 for styling the components.
+Drag and Drop (dnd-kit):
+@dnd-kit/accessibility: ^3.1.1
+@dnd-kit/core: ^6.3.1
+@dnd-kit/sortable: ^10.0.0
+@dnd-kit/utilities: ^3.2.2
+React Icons: ^5.5.0 for icons in the UI.
+
+ ![](https://github.com/Bilostenko/todo-list-react-typescript/blob/main/src/assets/todo_screen_screenshot.png)
+ 
