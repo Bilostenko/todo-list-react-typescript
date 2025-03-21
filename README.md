@@ -57,13 +57,3 @@ Here is a screenshot of the application:
    ```
 
 Visit `http://localhost:3000` in your browser to view the project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-Це буде виглядати чітко і організовано на сторінці GitHub, а також допоможе іншим користувачам швидко зрозуміти, які технології ти використовував і як запустити проект.
-
- 
