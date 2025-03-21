@@ -26,3 +26,7 @@ dist-ssr
 # Ignore compiled JS and map files
 *.js
 *.js.map
+
+# Ignore compiled JS files
+src/**/*.js
+src/**/*.js.map
