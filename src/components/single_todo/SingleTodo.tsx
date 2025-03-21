@@ -1,11 +1,15 @@
-import './singleTodo.sass'
+import "./singleTodo.sass";
 import { MdEdit, MdDelete, MdDoneOutline } from "react-icons/md";
-import { useAppDispatch } from '../../app/hooks';
-import { doneTodo, removeTodo, editTodo } from "../../features/submit_form/submitSlice"
-import { useState, useRef, useEffect } from 'react';
+import { useAppDispatch } from "../../app/hooks";
+import {
+  doneTodo,
+  removeTodo,
+  editTodo,
+} from "../../features/submit_form/submitSlice";
+import { useState, useRef, useEffect } from "react";
 import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from '@dnd-kit/utilities';
-import { Todo } from '../../model';
+import { CSS } from "@dnd-kit/utilities";
+import { Todo } from "../../model";
 
 interface SingleTodoProps {
   todo: Todo;
@@ -13,11 +17,11 @@ interface SingleTodoProps {
 }
 
 export default function SingleTodo({ todo }: SingleTodoProps) {
-  const [edit, setEdit] = useState<boolean>(false)
-  const [editedText, setEditedText] = useState<string>(todo.todo)
+  const [edit, setEdit] = useState<boolean>(false);
+  const [editedText, setEditedText] = useState<string>(todo.todo);
 
-  const dispatch = useAppDispatch()
-  const inputRef = useRef<HTMLInputElement>(null)
+  const dispatch = useAppDispatch();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleEdit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,25 +30,22 @@ export default function SingleTodo({ todo }: SingleTodoProps) {
   };
 
   useEffect(() => {
-    inputRef.current?.focus()
-  }, [edit])
+    inputRef.current?.focus();
+  }, [edit]);
 
-  // const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-  //   id: todo.id,
-  //   disabled: edit // Відключаємо сортування під час редагування
-  // })
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-    id: todo.id,
-    data: {
-      type: "todo",
-      todo
-    }
-  })
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: todo.id,
+      data: {
+        type: "todo",
+        todo,
+      },
+    });
 
   const style = {
     transition,
-    transform: CSS.Transform.toString(transform)
-  }
+    transform: CSS.Transform.toString(transform),
+  };
 
   const handleEditClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -77,12 +78,10 @@ export default function SingleTodo({ todo }: SingleTodoProps) {
               className="todos__single-input"
               onClick={(e) => e.stopPropagation()}
             />
+          ) : todo.isDone ? (
+            <s className="todos__single_text">{todo.todo}</s>
           ) : (
-            todo.isDone ? (
-              <s className="todos__single_text">{todo.todo}</s>
-            ) : (
-              <span className="todos__single_text">{todo.todo}</span>
-            )
+            <span className="todos__single_text">{todo.todo}</span>
           )}
         </div>
 
@@ -90,19 +89,22 @@ export default function SingleTodo({ todo }: SingleTodoProps) {
           <button
             type="button"
             className="todos__icon todos__icon_edit"
-            onClick={handleEditClick}>
+            onClick={handleEditClick}
+          >
             <MdEdit />
           </button>
           <button
             type="button"
             className="todos__icon todos__icon_delete"
-            onClick={handleDeleteClick}>
+            onClick={handleDeleteClick}
+          >
             <MdDelete />
           </button>
           <button
             type="button"
             className="todos__icon"
-            onClick={handleDoneClick}>
+            onClick={handleDoneClick}
+          >
             <MdDoneOutline />
           </button>
         </div>

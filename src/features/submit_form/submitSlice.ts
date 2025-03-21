@@ -2,17 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Todo } from '../../model'
 import { RootState } from '../../app/store'
 
-// Тип стану
 interface TodoState {
   todos: Todo[]
 }
 
-// Початковий стан
 const initialState: TodoState = {
   todos: [],
 }
 
-// Створення slice для роботи з todo
 export const todoSlice = createSlice({
   name: 'todos',
   initialState,
@@ -35,12 +32,9 @@ export const todoSlice = createSlice({
   },
 })
 
-// Експорт дій
 export const { addTodo, removeTodo, doneTodo, editTodo, reorderTodos } = todoSlice.actions
 
 // Селектор для отримання списку завдань
 export const selectTodos = (state: RootState) => state.todos.todos
 
-
-// Експорт reducer'а для додавання до store
 export default todoSlice.reducer

@@ -3,7 +3,7 @@ import { selectTodos, reorderTodos } from "../../features/submit_form/submitSlic
 import SingleTodo from "../single_todo/SingleTodo"
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { useMemo } from "react"
-import { DndContext, closestCorners, DragEndEvent, DragStartEvent } from "@dnd-kit/core";
+import { DndContext, closestCorners, DragEndEvent } from "@dnd-kit/core";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { arrayMove } from "@dnd-kit/sortable";
 
@@ -15,10 +15,6 @@ export default function TodoList() {
   const activeTodos = todos.filter(todo => !todo.isDone);
   const doneTodos = todos.filter(todo => todo.isDone);
 
-  const handleDragStart = (event: DragStartEvent) => {
-    // Логуємо для відлагодження, але нічого не зберігаємо в стейті
-    console.log("Drag started:", event.active.id);
-  };
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -43,31 +39,6 @@ export default function TodoList() {
       const overIndex = todos.findIndex(t => t.id === overId);
       newTodos = arrayMove(newTodos, activeIndex, overIndex);
     } 
-    // Перетягування між колонками
-    else {
-      // Знаходимо елемент, який перетягуємо
-      const draggedTodo = todos.find(t => t.id === activeId);
-      
-      if (draggedTodo) {
-        // Видаляємо елемент з поточної позиції
-        newTodos = newTodos.filter(t => t.id !== activeId);
-        
-        // Змінюємо статус елемента на протилежний
-        const updatedTodo = { 
-          ...draggedTodo, 
-          isDone: !draggedTodo.isDone 
-        };
-        
-        const overIndex = newTodos.findIndex(t => t.id === overId);
-        
-        // Вставляємо елемент на нову позицію
-        newTodos = [
-          ...newTodos.slice(0, overIndex + 1),
-          updatedTodo,
-          ...newTodos.slice(overIndex + 1)
-        ];
-      }
-    }
     
     dispatch(reorderTodos(newTodos));
   };
@@ -81,7 +52,6 @@ export default function TodoList() {
       <DndContext 
         collisionDetection={closestCorners} 
         onDragEnd={handleDragEnd} 
-        onDragStart={handleDragStart}
       >
         <div className="todos">
           <span className="todos_heading">Active task</span>
